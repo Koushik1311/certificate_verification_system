@@ -3,7 +3,6 @@
 import { DashboardLinks } from "@/constants/dashboard-links";
 import Link from "next/link";
 import Logo from "../global/Logo";
-import { LogOut } from "lucide-react";
 import { usePathname } from "next/navigation";
 import cn from "@/lib/utils";
 
@@ -11,7 +10,7 @@ export default function DashboardLeftBar() {
   const pathname = usePathname();
 
   return (
-    <div className="h-full flex flex-col items-start justify-between pt-8">
+    <>
       {/* Logo */}
       <div className="ml-3">
         <Logo />
@@ -37,10 +36,6 @@ export default function DashboardLeftBar() {
           );
         })}
       </ul>
-      <button className="flex items-center gap-2 ml-4 mt-auto h-12 pb-6 w-52 hover:text-blue-600 transition-colors">
-        <LogOut className="w-5 h-5" />
-        <span>Log out</span>
-      </button>
-    </div>
+    </>
   );
 }
