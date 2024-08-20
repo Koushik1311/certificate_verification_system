@@ -4,6 +4,10 @@ export const NavLinks = [
     link: "/",
   },
   {
+    label: "Verify",
+    link: "/verify",
+  },
+  {
     label: "About",
     link: "/link",
   },

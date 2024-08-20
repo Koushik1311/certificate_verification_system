@@ -37,4 +37,20 @@ const getAllCertificates = async () => {
   }
 };
 
-export { extractAndSaveCertificate, getAllCertificates };
+const getSearchedCertificate = async (certificateId: string) => {
+  try {
+    const response = await axios.get(
+      `${apiBaseUri}/certificates/${certificateId}`
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error("Something went wrong");
+  }
+};
+
+export {
+  extractAndSaveCertificate,
+  getAllCertificates,
+  getSearchedCertificate,
+};
