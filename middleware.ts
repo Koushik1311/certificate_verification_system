@@ -3,15 +3,19 @@ import type { NextRequest } from "next/server";
 import { refreshAccessToken } from "./data/auth/authentication";
 
 export async function middleware(request: NextRequest) {
-  const access_Token = request.cookies.get("accessToken");
-  const refresh_Token = request.cookies.get("refreshToken");
+  const accessToken = request.cookies.get("accessToken");
+  const refreshToken = request.cookies.get("refreshToken");
 
-  if (!access_Token && refresh_Token) {
-    return await refreshAccessToken();
+  if (!accessToken && refreshToken) {
+    const response = await refreshAccessToken();
+    return response;
   }
-  if (!refresh_Token) {
+
+  if (!refreshToken) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
