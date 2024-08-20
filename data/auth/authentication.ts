@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+
 const apiBaseUri = process.env.NEXT_PUBLIC_API_BASE_URI;
 
 const registerUser = async (
