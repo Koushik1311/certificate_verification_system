@@ -27,4 +27,14 @@ const extractAndSaveCertificate = async (id: string) => {
   }
 };
 
-export { extractAndSaveCertificate };
+const getAllCertificates = async () => {
+  try {
+    const response = await axios.get(`${apiBaseUri}/certificates`);
+
+    return response.data;
+  } catch (error) {
+    throw new Error("Something went wrong");
+  }
+};
+
+export { extractAndSaveCertificate, getAllCertificates };
