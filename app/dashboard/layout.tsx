@@ -2,6 +2,7 @@
 
 import DashboardLeftBar from "@/components/layout/DashboardLeftBar";
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -15,6 +16,7 @@ export default function DashboardRootLayout({
 }>) {
   return (
     <div className="flex mx-4 h-screen">
+      <Toaster position="top-right" duration={2000} />
       {/* Left bar */}
       <div>
         <DashboardLeftBar />

@@ -30,16 +30,12 @@ export default async function Login({
     cookies().set({
       name: "accessToken",
       value: accessToken,
-      httpOnly: true,
-      secure: true,
       maxAge: 60 * 60 * 24,
     });
 
     cookies().set({
       name: "refreshToken",
       value: refreshToken,
-      httpOnly: true,
-      secure: true,
       maxAge: 60 * 60 * 24 * 30,
     });
 

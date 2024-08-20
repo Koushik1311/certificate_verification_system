@@ -1,31 +1,15 @@
-"use client";
-
-import { useState } from "react";
+import AllFiles from "@/components/dashboard/upload/AllFiles";
+import FileUpload from "@/components/dashboard/upload/FileUpload";
+import InteractiveSection from "@/components/global/InteractiveSection";
 
 export default function Upload() {
-  const [file, setFile] = useState<File>();
-
   return (
-    <div>
+    <div className="mt-8 mx-8">
       <h1>Upload</h1>
-
-      <div>
-        <input
-          type="file"
-          onChange={(e) => {
-            setFile(e.target.files?.[0]);
-          }}
-        />
-
-        <button
-          onClick={() => {
-            console.log("upload");
-            // Send it to backend
-          }}
-        >
-          Upload
-        </button>
-      </div>
+      <InteractiveSection sectionHeading="All files">
+        <AllFiles />
+      </InteractiveSection>
+      <FileUpload />
     </div>
   );
 }

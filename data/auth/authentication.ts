@@ -79,14 +79,10 @@ const refreshAccessToken = async () => {
 
     const res = NextResponse.next();
     res.cookies.set("accessToken", access_Token, {
-      httpOnly: true,
-      secure: true,
       maxAge: 60 * 60 * 24,
     });
 
     res.cookies.set("refreshToken", refresh_Token, {
-      httpOnly: true,
-      secure: true,
       maxAge: 60 * 60 * 24 * 30,
     });
 
