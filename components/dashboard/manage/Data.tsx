@@ -34,7 +34,6 @@ export default function Data({ certificates }: Props) {
     const loadingToastId = toast.loading("Deleating certificate...");
     try {
       const response = await deleteCertificate(id);
-      // Filter out the deleted certificate from the local state
 
       if (response.statusCode === 404) {
         toast.info("Certificate not found", { id: loadingToastId });
@@ -46,7 +45,6 @@ export default function Data({ certificates }: Props) {
       toast.success("Certificate deleted successfully", { id: loadingToastId });
       setLocalCertificates(updatedCertificates);
 
-      // Reload the current route to refresh the data
       router.refresh();
     } catch (error) {
       console.error("Failed to delete certificate:", error);
@@ -59,7 +57,6 @@ export default function Data({ certificates }: Props) {
   };
 
   const handleUpdateSuccess = async () => {
-    // Refresh the data after successful update
     const data = await getAllCertificates();
     const certificates: CertificateTypes[] = data.data;
     setLocalCertificates(certificates);
