@@ -15,7 +15,7 @@ export default function VerifyPage() {
           className="w-32 h-auto"
         />
 
-        <h2 className="mt-8 mb-6 text-slate-600 text-2xl font-medium">
+        <h2 className="mt-8 mb-6 text-slate-600 text-2xl font-medium text-center">
           Search for certificate using certificate id
         </h2>
 

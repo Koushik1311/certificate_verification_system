@@ -17,7 +17,7 @@ export function convertTimestampToComponents(timestamp: string) {
   const time = date.toLocaleTimeString("en-US", timeOptions);
   const weekday = date.toLocaleDateString("en-US", weekdayOptions);
   const year = date.toLocaleDateString("en-US", yearOptions);
-  const month = date.toLocaleDateString("en-US", monthOptions);
+  const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = date.toLocaleDateString("en-US", dayOptions);
 
   return {

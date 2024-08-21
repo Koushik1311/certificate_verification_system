@@ -1,5 +1,5 @@
+import Data from "@/components/dashboard/manage/Data";
 import { getAllCertificates } from "@/data/certificate";
-import { getDay, getMonth, getYear } from "@/utils/local-date-and-time";
 
 type CertificateTypes = {
   _id: string;
@@ -39,36 +39,12 @@ export default async function Manage() {
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Created At
             </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Action
+            </th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {certificates.map((certificate) => (
-            <tr key={certificate._id}>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                {certificate.certificateId}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {certificate.studentName}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {certificate.internshipDomain}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {getYear(certificate.startingDate)}-
-                {getMonth(certificate.startingDate)}-
-                {getDay(certificate.startingDate)}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {getYear(certificate.endingDate)}-
-                {getMonth(certificate.endingDate)}-
-                {getDay(certificate.endingDate)}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {certificate.createdAt}
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <Data certificates={certificates} />
       </table>
     </div>
   );

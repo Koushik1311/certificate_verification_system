@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import { getCookie } from "cookies-next";
+import { deleteCertificate } from "@/data/certificate";
 
 export default function Test() {
   const [cookielocal, setCookielocal] = useState();
 
-  const getCookieLocal = () => {
-    const value = getCookie("accessToken");
+  const getCookieLocal = async () => {
+    await deleteCertificate("23123hhsdhdh4234");
 
-    console.log("Value", value);
+    // console.log("Value", value);
   };
 
   return (
