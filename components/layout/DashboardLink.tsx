@@ -9,7 +9,7 @@ export default function DashboardLink() {
   const pathname = usePathname();
 
   return (
-    <ul className="-mt-28">
+    <ul className="mt-6">
       {DashboardLinks.map((link, index) => {
         const isActive = pathname.startsWith(`${link.link}`);
 
