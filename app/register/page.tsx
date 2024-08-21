@@ -4,12 +4,20 @@ import Link from "next/link";
 import Logo from "@/components/global/Logo";
 import AuthButton from "@/components/user/AuthButton";
 import { registerUser } from "@/data/auth/authentication";
+import { cookies } from "next/headers";
 
 export default async function SignUp({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
+  const cookieStore = cookies();
+  const hasCookie = cookieStore.has("refreshToken");
+
+  if (hasCookie) {
+    return redirect("/dashboard/upload");
+  }
+
   const signUp = async (formData: FormData) => {
     "use server";
 

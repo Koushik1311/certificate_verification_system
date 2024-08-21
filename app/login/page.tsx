@@ -11,6 +11,13 @@ export default async function Login({
 }: {
   searchParams: { message: string };
 }) {
+  const cookieStore = cookies();
+  const hasCookie = cookieStore.has("refreshToken");
+
+  if (hasCookie) {
+    return redirect("/dashboard/upload");
+  }
+
   const logIn = async (formData: FormData) => {
     "use server";
 
