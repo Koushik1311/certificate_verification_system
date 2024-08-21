@@ -1,8 +1,7 @@
 "use client";
 
-import { fetchAllFiles } from "@/data/file";
-import { FileSpreadsheet } from "lucide-react";
-import ExtractAndSaveButton from "@/components/global/ExtractAndSaveButton";
+import { deleteFile, fetchAllFiles } from "@/data/file";
+import { FileCog, FileSpreadsheet, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { CloudUpload } from "lucide-react";
@@ -10,6 +9,8 @@ import Modal from "react-modal";
 import { getCookie } from "cookies-next";
 import SubmitButton from "@/components/global/SubmitButton";
 import { toast } from "sonner";
+import { extractAndSaveCertificate } from "@/data/certificate";
+import { useRouter } from "next/navigation";
 
 type fileType = {
   _id: string;
@@ -24,6 +25,8 @@ export default function Files() {
   const [fileName, setFileName] = useState<string | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [files, setFiles] = useState<fileType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -37,7 +40,7 @@ export default function Files() {
     };
 
     fetchFiles();
-  });
+  }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -51,8 +54,8 @@ export default function Files() {
     if (!file) return;
 
     const apiBaseUri = process.env.NEXT_PUBLIC_API_BASE_URI;
-
     const localAccessToken = getCookie("accessToken");
+
     const config = {
       headers: {
         Authorization: `Bearer ${localAccessToken}`,
@@ -94,6 +97,49 @@ export default function Files() {
     setModalIsOpen(false);
   };
 
+  const extractAndSaveHandle = async (id: string) => {
+    setIsLoading(true);
+    const loadingToastId = toast.loading(
+      "Extracting and saving certificates..."
+    );
+
+    try {
+      const data = await extractAndSaveCertificate(id);
+      if (!data) {
+        toast.info("Extraction failed", { id: loadingToastId });
+      } else {
+        toast.success("Extraction successful", { id: loadingToastId });
+
+        const response = await fetchAllFiles();
+        const data: fileType[] = response.data;
+        setFiles(data);
+      }
+    } catch (error) {
+      toast.error("An error occurred", { id: loadingToastId });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    const loadingToastId = toast.loading("Deleating certificate...");
+    try {
+      const response = await deleteFile(id);
+
+      if (response.statusCode === 404) {
+        toast.info("File not found", { id: loadingToastId });
+      }
+
+      const updatedFiles = files.filter((file) => file._id !== id);
+      toast.success("Certificate deleted successfully", { id: loadingToastId });
+      setFiles(updatedFiles);
+
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to delete certificate:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-between h-full">
       {/* Header Row */}
@@ -110,12 +156,12 @@ export default function Files() {
           </div>
         </div>
         <ul>
-          {files.map((file, index) => {
+          {files.map((file) => {
             const fileName = file.fileUrl.split("student_data/")[1];
 
             return (
               <li
-                key={index}
+                key={file._id}
                 className="flex justify-between items-center py-2 border-b border-gray-200"
               >
                 <div className="w-1/2 flex items-center gap-2">
@@ -126,10 +172,26 @@ export default function Files() {
                   <p>{file.createdAt}</p>
                 </div>
                 <div className="w-1/4 text-right flex items-end justify-end">
-                  <ExtractAndSaveButton
-                    fileId={file._id}
-                    isExtracted={file.isExtracted}
-                  />
+                  <div className="flex flex-col items-center gap-2">
+                    {!file.isExtracted ? (
+                      <button
+                        onClick={() => extractAndSaveHandle(file._id)}
+                        disabled={isLoading}
+                        className="flex items-center gap-2 hover:text-blue-400 transition-colors disabled:opacity-50"
+                      >
+                        <FileCog className="w-5 h-5" />
+                        <p>Extract & Save</p>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleDelete(file._id)}
+                        className="flex items-center gap-2 hover:text-red-400 transition-colors disabled:opacity-50"
+                      >
+                        <Trash2 className="w-5 h-5" />
+                        <p>Delete</p>
+                      </button>
+                    )}
+                  </div>
                 </div>
               </li>
             );
