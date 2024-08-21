@@ -1,7 +1,0 @@
-export default function page() {
-  return (
-    <div>
-      <h2>Overview</h2>
-    </div>
-  );
-}
