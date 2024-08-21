@@ -47,4 +47,22 @@ const uploadFile = async (localUploadedFile: File) => {
   }
 };
 
-export { fetchAllFiles, uploadFile };
+const deleteFile = async (id: string) => {
+  const localAccessToken = getCookie("accessToken");
+
+  const config: AxiosRequestConfig = {
+    headers: {
+      Authorization: `Bearer ${localAccessToken}`,
+    },
+  };
+
+  try {
+    const response = await axios.delete(`${apiBaseUri}/files/${id}`, config);
+
+    return response.data;
+  } catch (error) {
+    throw new Error("Something went wrong");
+  }
+};
+
+export { fetchAllFiles, uploadFile, deleteFile };
