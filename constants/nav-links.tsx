@@ -7,8 +7,8 @@ export const NavLinks = [
     label: "Verify",
     link: "/verify",
   },
-  {
-    label: "About",
-    link: "/link",
-  },
+  // {
+  //   label: "About",
+  //   link: "/link",
+  // },
 ];
