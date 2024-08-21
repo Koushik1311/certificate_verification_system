@@ -1,11 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { getCookie, getCookies } from "cookies-next";
-import { cookies } from "next/headers";
+import { getCookie } from "cookies-next";
 
 const apiBaseUri = process.env.NEXT_PUBLIC_API_BASE_URI;
 
 const fetchAllFiles = async () => {
-  const localAccessToken = getCookie("accessToken", { cookies });
+  const localAccessToken = getCookie("accessToken");
 
   const config: AxiosRequestConfig = {
     headers: {
@@ -23,11 +22,11 @@ const fetchAllFiles = async () => {
 };
 
 const uploadFile = async (localUploadedFile: File) => {
-  const localAccessToken = cookies().get("accessToken");
+  const localAccessToken = getCookie("accessToken");
 
   const config: AxiosRequestConfig = {
     headers: {
-      Authorization: `Bearer ${localAccessToken?.value}`,
+      Authorization: `Bearer ${localAccessToken}`,
       "Content-Type": "multipart/form-data",
     },
   };

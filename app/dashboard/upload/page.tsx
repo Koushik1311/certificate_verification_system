@@ -1,15 +1,9 @@
-import AllFiles from "@/components/dashboard/upload/AllFiles";
-import FileUpload from "@/components/dashboard/upload/FileUpload";
-import InteractiveSection from "@/components/global/InteractiveSection";
+import Files from "@/components/dashboard/upload/Files";
 
 export default function Upload() {
   return (
-    <div className="mt-8 mx-8">
-      <h1>Upload</h1>
-      <InteractiveSection sectionHeading="All files">
-        <AllFiles />
-      </InteractiveSection>
-      <FileUpload />
+    <div className="pt-8 pb-8 mx-8">
+      <Files />
     </div>
   );
 }

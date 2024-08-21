@@ -148,7 +148,7 @@ export default function UpdateData({
         <SubmitButton
           type="button"
           onClick={onRequestClose}
-          className="w-full flex items-center justify-center h-9 rounded-[6px] bg-blue-600 hover:bg-blue-500 transition-all duration-150 text-sm font-semibold text-white mt-3"
+          className="w-full flex items-center justify-center h-9 rounded-[6px] bg-red-500 hover:bg-red-400 transition-all duration-150 text-sm font-semibold text-white mt-3"
         >
           Cancel
         </SubmitButton>
