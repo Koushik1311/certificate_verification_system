@@ -21,7 +21,7 @@ export default async function Login({
     const data = await loginUser(email, password);
 
     if (!data) {
-      return redirect("/signup?message=Could not login user");
+      return redirect("/login?message=Could not login user");
     }
 
     const accessToken = data.data.accessToken;
@@ -39,7 +39,7 @@ export default async function Login({
       maxAge: 60 * 60 * 24 * 30,
     });
 
-    return redirect("/dashboard/overview");
+    return redirect("/dashboard/upload");
   };
 
   return (
