@@ -24,7 +24,7 @@ export default function NavBar() {
       <div>
         {/* Dashboard */}
         <Link
-          href="/dashboard/overview"
+          href="/dashboard/upload"
           className="border border-blue-400 bg-blue-300 hover:border-blue-500 hover:bg-blue-400 transition duration-300 text-white rounded-lg px-3 py-1"
         >
           Dashboard
