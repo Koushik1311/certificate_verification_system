@@ -15,12 +15,14 @@ export default function DashboardLeftBar() {
 
   return (
     <div className="h-full flex flex-col items-start justify-between pt-8">
-      {/* Logo */}
-      <div className="ml-3">
-        <Logo />
-      </div>
+      <div className="flex flex-col">
+        {/* Logo */}
+        <div className="ml-3">
+          <Logo />
+        </div>
 
-      <DashboardLink />
+        <DashboardLink />
+      </div>
       <form>
         <button
           formAction={logoutButtonClick}
