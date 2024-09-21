@@ -14,7 +14,7 @@ export default function DashboardLeftBar() {
   };
 
   return (
-    <div className="h-full flex flex-col items-start justify-between pt-8">
+    <div className="h-full fixed flex flex-col items-start justify-between pt-8">
       <div className="flex flex-col">
         {/* Logo */}
         <div className="ml-3">
