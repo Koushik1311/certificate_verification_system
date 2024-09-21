@@ -22,7 +22,7 @@ export default function DashboardRootLayout({
         <DashboardLeftBar />
       </div>
       {/* Children or pages */}
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 ml-64">{children}</div>
     </div>
   );
 }
