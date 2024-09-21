@@ -96,7 +96,7 @@ export default async function Login({
             formAction={logIn}
             pendingText="Logging In..."
           >
-            Sign Up
+            Log In
           </AuthButton>
         </form>
 
@@ -107,9 +107,9 @@ export default async function Login({
         )}
 
         <p className="text-xs text-center mt-6">
-          Already have an Account?{" "}
-          <Link href="/login" className="text-blue-400 font-medium">
-            Log In Now
+          Don&apos;t have an Account?{" "}
+          <Link href="/register" className="text-blue-400 font-medium">
+            Sign Up Now
           </Link>
         </p>
 
