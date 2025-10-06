@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; // prevent static generation
+
 import Data from "@/components/dashboard/manage/Data";
 import { getAllCertificates } from "@/data/certificate";
 
@@ -13,8 +15,14 @@ type CertificateTypes = {
 };
 
 export default async function Manage() {
-  const data = await getAllCertificates();
-  const certificates: CertificateTypes[] = data.data;
+  let certificates: CertificateTypes[] = [];
+
+  try {
+    const data = await getAllCertificates();
+    certificates = data.data as CertificateTypes[];
+  } catch (e) {
+    // Render a graceful UI instead of throwing during build/runtime
+  }
 
   return (
     <div className="p-6">
@@ -46,6 +54,9 @@ export default async function Manage() {
         </thead>
         <Data certificates={certificates} />
       </table>
+      {certificates.length === 0 && (
+        <p className="text-sm text-gray-500 mt-4">No data to display.</p>
+      )}
     </div>
   );
 }
